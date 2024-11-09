@@ -3,15 +3,7 @@ import {CallParam, CallProcessService} from "easy-call-js";
 import {PeerService} from "../peer.service";
 import {Router} from "@angular/router";
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyA4kjkPodiM2-lwCRxog0FoEOpvyRLnFgE",
-  authDomain: "mkutano-6e62b.firebaseapp.com",
-  projectId: "mkutano-6e62b",
-  storageBucket: "mkutano-6e62b.firebasestorage.app",
-  messagingSenderId: "216681224820",
-  appId: "1:216681224820:web:202a8d2cfcab72e32ecf21",
-  measurementId: "G-KLBJN3W0L4"
-};
+export const firebaseConfig = {};
 
 export const configuration = {
   iceServers: [
