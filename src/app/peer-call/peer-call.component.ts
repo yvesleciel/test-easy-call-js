@@ -3,15 +3,7 @@ import {CallParam, CallProcessService} from "easy-call-js";
 import {PeerService} from "../peer.service";
 import {Router} from "@angular/router";
 
-export const firebaseConfig = {
-  apiKey: "REDACTED_FIREBASE_API_KEY",
-  authDomain: "REDACTED.firebaseapp.com",
-  projectId: "REDACTED_PROJECT_ID",
-  storageBucket: "REDACTED.firebasestorage.app",
-  messagingSenderId: "REDACTED_SENDER_ID",
-  appId: "1:REDACTED_SENDER_ID:web:202a8d2cfcab72e32ecf21",
-  measurementId: "REDACTED_MEASUREMENT_ID"
-};
+export const firebaseConfig = {};
 
 export const configuration = {
   iceServers: [
