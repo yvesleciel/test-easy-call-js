@@ -18,14 +18,14 @@ ng serve --host 0.0.0.0 --port 4200 --ssl true
 The main user initiating the call connects via:
 
 ```plaintext
-https://192.168.1.14:4200/home?userId=1111
+https://LOCAL_IP:4200/home?userId=1111
 ```
 
 The users joining the call connect via:
 
 ```plaintext
-https://192.168.1.14:4200/home?userId=2222
-https://192.168.1.14:4200/home?userId=3333
+https://LOCAL_IP:4200/home?userId=2222
+https://LOCAL_IP:4200/home?userId=3333
 ```
 
 Once users `2222` and `3333` access the application, and the main user (`1111`) initiates the call, a **"Take Call"** button will appear for `2222` and `3333`. Clicking this button allows them to answer the call.
