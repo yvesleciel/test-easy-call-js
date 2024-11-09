@@ -1,27 +1,52 @@
 # TestEasyCallJs
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
+---
 
-## Development server
+## **Getting Started with the Library**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### **Test Setup**
 
-## Code scaffolding
+For testing purposes, we assume that users with IDs `2222` and `3333` will be contacted by the user with ID `1111`. *(In a real application, you would use actual user IDs from your database or authentication system.)*
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Since we are running locally, all devices must be connected to the same network, and the Angular project should be started with the following command:
 
-## Build
+```bash
+ng serve --host 0.0.0.0 --port 4200 --ssl true
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The main user initiating the call connects via:
 
-## Running unit tests
+```plaintext
+https://192.168.1.14:4200/home?userId=1111
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The users joining the call connect via:
 
-## Running end-to-end tests
+```plaintext
+https://192.168.1.14:4200/home?userId=2222
+https://192.168.1.14:4200/home?userId=3333
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Once users `2222` and `3333` access the application, and the main user (`1111`) initiates the call, a **"Take Call"** button will appear for `2222` and `3333`. Clicking this button allows them to answer the call.
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### **No Expertise Required**
+
+- **No Firebase or WebRTC expertise needed**: This library simplifies the process, allowing you to implement multipoint video calls in your application without prior knowledge of Firebase or WebRTC.
+- If you prefer not to use Firebase, you can create your own implementation of the `CallProcess` interface using your custom signaling server.
+
+---
+
+### **Simple and Free**
+
+This library makes it **easy** and **free** to integrate multipoint video calls, even for developers new to WebRTC.
+
+---
+
+### **Try It Out and Share Your Feedback**
+
+Feel free to integrate this library into other contexts or frameworks. Share your feedback and experiences with us—your input helps us improve and explore new possibilities! 🚀
+
+---

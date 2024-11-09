@@ -1,0 +1,45 @@
+.video-call-component {
+  background-color: #000; /* Fond noir uniquement pour ce composant */
+  color: #fff; /* Texte blanc pour le composant */
+  padding: 20px;
+  width: 1200px;
+  margin: auto;
+  border-radius: 10px; /* Optionnel : pour un effet plus moderne */
+}
+
+#content {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  align-content: space-between;
+  gap: 10px; /* Espace entre les vidéos */
+}
+
+video {
+  border-radius: 8px; /* Optionnel : coins arrondis pour les vidéos */
+}
+
+h2, h3 {
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* S'assure que le bouton est centré */
+}
+
+.action-button {
+  padding: 10px 20px;
+  background-color: #1a73e8; /* Couleur de bouton similaire à Teams */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.action-button:hover {
+  background-color: #135abd; /* Couleur plus foncée au survol */
+}
