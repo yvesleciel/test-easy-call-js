@@ -19,7 +19,7 @@ export class HomeComponent implements OnChanges{
    router = inject(Router);
 
    emitCall(): void {
-     this.peerService.callSubject.next({usersToCallId: ['2222', '3333'],
+     this.peerService.callSubject.next({usersToCallId: ['2222', '3333', '4444'],
                                               callIssuerId: this.userId, videoSelector: 'localVideo', idContentForCall: 'content'});
      this.router.navigate(['/call', this.userId]);
    }

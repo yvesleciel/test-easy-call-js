@@ -88,7 +88,7 @@ export class PeerCallComponent implements OnInit{
 
   async releaseCall() {
     try {
-      this.callService.releaseCall(this.callId, this.userId);
+      await this.callService.releaseCall(this.callId, this.userId);
     }catch(error){
       console.log(error)
     }finally {
