@@ -1,9 +1,10 @@
 .video-call-component {
-  background-color: #000; /* Fond noir uniquement pour ce composant */
+  background-color: #fd4c00; /* Fond noir uniquement pour ce composant */
   color: #fff; /* Texte blanc pour le composant */
   padding: 20px;
   width: 1200px;
   margin: auto;
+  object-fit: cover;
   border-radius: 10px; /* Optionnel : pour un effet plus moderne */
 }
 
