@@ -1,0 +1,66 @@
+rules_version = '2';
+
+// Security rules for the `test-easy-call-js` demo, matching the data model
+// written by easy-call-js's FirebaseCallProcess adapter (see easy-call-js's
+// README → "Signaling" for the authoritative path/shape reference):
+//
+//   rooms/{callId}                     { personIds, inCall }
+//   rooms/{callId}/lock/mutex          { participantId, timestamp }
+//   rooms/{callId}/sdp/{type}/{peerId}/{msgId}  { offer|answer|ice, issuer }
+//   rooms/{callId}/leave/{msgId}       { userId, timestamp }
+//   users/{userId}/call/callId         { callId, from }
+//
+// ⚠️ Read this before deploying:
+// This demo's Identity screen does not use Firebase Authentication — the
+// `userId` a visitor types is just a string, not a verified identity. The
+// rules below gate every path behind `signedIn()`, i.e. "some Firebase user
+// is signed in" — that stops anonymous internet scraping/tampering of an
+// open Firestore database, but it is NOT per-user authorization: a signed-in
+// client can still write into any callId or any user's `users/*/call` path,
+// the same way the app itself does today. Firestore has no way to check
+// "is this really alice" without your app establishing that identity first.
+//
+// To make `signedIn()` non-vacuous:
+//   Firebase console → Authentication → Sign-in method → enable "Anonymous",
+//   then sign the visitor in (e.g. `signInAnonymously(auth)`) before calling
+//   any easy-call-js method — FirebaseCallProcess does not do this for you.
+// Without that, every request below is rejected (Firestore denies by
+// default), which is the right failure mode for a rules file — never widen
+// these to `allow read, write: if true;` to "make it work" instead.
+//
+// For a production app built on this demo, replace `signedIn()` with real
+// per-user checks (e.g. `request.auth.uid == userId`) once you have real
+// authenticated identities to check against.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    match /rooms/{callId} {
+      allow read, create: if signedIn();
+      // Joining only ever adds the joiner to `inCall` — never rewrites
+      // `personIds` or any other field.
+      allow update: if signedIn()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['inCall']);
+
+      match /lock/mutex {
+        allow read, write: if signedIn();
+      }
+
+      match /sdp/{type}/{peerId}/{msgId} {
+        allow read, create: if signedIn();
+      }
+
+      match /leave/{msgId} {
+        allow read, create: if signedIn();
+      }
+    }
+
+    match /users/{userId}/call/{callId} {
+      allow read, write: if signedIn();
+    }
+  }
+}

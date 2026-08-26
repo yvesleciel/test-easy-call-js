@@ -1,0 +1,103 @@
+<div class="hub">
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand">easy-call-js v2 — hub</div>
+    <div class="me">
+      Connecté en tant que <strong>{{ userId() }}</strong>
+      <button class="copy-id" (click)="copyMyId()" title="Copier mon identifiant">
+        {{ justCopiedId() ? 'Copié ✓' : '📋' }}
+      </button>
+      <span class="pill" [class.pill-idle]="status() === 'idle'"
+                        [class.pill-active]="status() === 'in-call'"
+                        [class.pill-alert]="status() === 'incoming'"
+                        [class.pill-calling]="status() === 'calling'">
+        {{ state() }}
+      </span>
+      <button class="logout" (click)="logout()">Déconnexion</button>
+    </div>
+  </header>
+
+  <!-- INCOMING CALL BANNER -->
+  @if (status() === 'incoming' && incomingCallId(); as callId) {
+    <section class="banner incoming">
+      <div>
+        <strong>📞 {{ incomingCallerName() }} vous appelle</strong>
+        <div class="banner-sub">id de session : {{ callId }}</div>
+      </div>
+      <div class="banner-actions">
+        <button class="btn btn-accept" (click)="acceptIncoming()">Accepter</button>
+        <button class="btn btn-reject" (click)="rejectIncoming()">Refuser</button>
+      </div>
+    </section>
+  }
+
+  <!-- ERROR / INFO MESSAGES -->
+  @if (errorMessage(); as msg) {
+    <section class="banner error">
+      ⚠️ {{ msg }}
+    </section>
+  }
+  @if (infoMessage(); as msg) {
+    <section class="banner info">
+      ℹ️ {{ msg }}
+    </section>
+  }
+
+  <!-- VIDEO GRID -->
+  <section class="video-grid">
+    <!-- Local -->
+    <div class="tile local">
+      <video
+        [ecVideo]="localStream()"
+        [ecMuted]="true"
+        [ecAutoplay]="true"
+        [ecPlaysInline]="true"
+      ></video>
+      <div class="tile-label">Vous ({{ userId() }})</div>
+    </div>
+
+    <!-- Remotes -->
+    @for (entry of remoteEntries(); track entry.participantId) {
+      <div class="tile remote">
+        <video
+          [ecVideo]="entry.stream"
+          [ecAutoplay]="true"
+          [ecPlaysInline]="true"
+        ></video>
+        <div class="tile-label">{{ entry.participantId }}</div>
+      </div>
+    }
+  </section>
+
+  <!-- CONTROLS -->
+  <section class="controls">
+    @if (status() === 'idle' && !canLeaveCall()) {
+      <label for="targets">Appeler qui ? (identifiant(s) partagé(s) par la personne à joindre)</label>
+      <input
+        id="targets"
+        type="text"
+        placeholder="ex : swift-otter-42, calm-lynx-17"
+        [ngModel]="targetsInput()"
+        (ngModelChange)="targetsInput.set($event)"
+        name="targets"
+      />
+      <button class="btn btn-primary" (click)="startCall()" [disabled]="!targetsInput().trim()">
+        Démarrer l'appel
+      </button>
+    }
+
+    @if (status() === 'calling') {
+      <span class="loading">Connexion en cours…</span>
+    }
+
+    @if (canLeaveCall()) {
+      <span class="info-line">
+        <strong>Appel en cours</strong>
+        <small class="muted">id : {{ currentCallId() }}</small>
+      </span>
+      <button class="btn btn-danger" (click)="leaveCall()">Quitter l'appel</button>
+    }
+  </section>
+
+</div>

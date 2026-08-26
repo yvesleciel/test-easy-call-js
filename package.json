@@ -19,7 +19,8 @@
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
     "bootstrap": "^5.3.3",
-    "easy-call-js": "^1.0.1",
+    "easy-call-js": "^2.0.3",
+    "firebase": "^10.13.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

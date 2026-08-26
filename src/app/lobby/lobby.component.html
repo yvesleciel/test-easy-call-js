@@ -1,0 +1,68 @@
+<div class="lobby-page">
+  <div class="card">
+    <h1>easy-call-js v2 — demo</h1>
+    <p class="lead">
+      Votre identifiant pour ce test a été généré automatiquement — pas
+      besoin d'en choisir un.
+    </p>
+
+    <div class="id-box">
+      <span class="id-value">{{ id() }}</span>
+      <button type="button" class="btn btn-ghost" (click)="regenerate()" title="Générer un nouvel identifiant">
+        ↻
+      </button>
+    </div>
+
+    <div class="copy-actions">
+      <button type="button" class="btn btn-secondary" (click)="copyId()">
+        {{ justCopied() === 'id' ? 'Copié ✓' : 'Copier l\'identifiant' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="copyLink()">
+        {{ justCopied() === 'link' ? 'Copié ✓' : "Copier le lien d'invitation" }}
+      </button>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="enter()">
+      Entrer dans le hub
+    </button>
+
+    <div class="hints">
+      <p class="hints-title"><strong>Comment tester un appel</strong></p>
+      <ol>
+        <li>
+          Chaque participant ouvre cette page sur son <strong>propre
+          appareil</strong> (téléphone, autre ordinateur…). Chacun reçoit
+          automatiquement son propre identifiant, affiché ci-dessus.
+        </li>
+        <li>
+          Tout le monde <strong>sauf la personne qui appellera</strong>
+          copie son identifiant (ou son lien d'invitation) et l'envoie à
+          cette personne — par message, SMS, peu importe le canal.
+        </li>
+        <li>
+          <strong>La personne désignée</strong> entre dans son hub, colle
+          les identifiants reçus dans le champ destinataires (séparés par
+          des virgules s'il y en a plusieurs) et clique sur « Appeler ».
+        </li>
+        <li>
+          Les autres n'ont rien d'autre à faire qu'être sur leur hub : une
+          bannière d'appel entrant apparaît, il suffit de cliquer sur
+          « Accepter ».
+        </li>
+      </ol>
+      <p>
+        <strong>À 3 participants ou plus :</strong> même procédure — la
+        personne désignée colle tous les identifiants reçus dans le même
+        champ, séparés par des virgules, et appelle tout le monde en une
+        seule fois.
+      </p>
+      <p class="hint-warning">
+        ⚠️ N'ouvrez pas plusieurs onglets du même navigateur sur un seul
+        appareil pour simuler plusieurs participants : la caméra ne peut
+        être utilisée que par un onglet à la fois, les flux vidéo ne
+        seront donc pas indépendants. Un test représentatif demande des
+        appareils physiques distincts.
+      </p>
+    </div>
+  </div>
+</div>

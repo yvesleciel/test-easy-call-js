@@ -1,0 +1,156 @@
+.lobby-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+  padding: 24px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  max-width: 460px;
+  width: 100%;
+
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    color: #1e3a8a;
+  }
+
+  .lead {
+    color: #475569;
+    margin-bottom: 24px;
+  }
+}
+
+.id-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  margin-bottom: 12px;
+
+  .id-value {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    letter-spacing: 0.3px;
+    user-select: all;
+  }
+}
+
+.copy-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+
+  .btn {
+    flex: 1;
+  }
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  &:not(:disabled):hover {
+    filter: brightness(0.97);
+  }
+}
+
+.btn-primary {
+  width: 100%;
+  background: #1e3a8a;
+  color: white;
+  padding: 12px;
+  font-size: 1rem;
+
+  &:hover {
+    background: #1e40af;
+  }
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #1e293b;
+
+  &:hover {
+    background: #cbd5e1;
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #93c5fd;
+  color: #1e3a8a;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+
+  &:hover {
+    background: #dbeafe;
+  }
+}
+
+.hints {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+  color: #64748b;
+
+  p, ol {
+    margin: 0 0 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .hints-title {
+    font-size: 0.9rem;
+  }
+
+  ol {
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 6px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  strong {
+    color: #334155;
+  }
+
+  .hint-warning {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: #92400e;
+
+    strong {
+      color: inherit;
+    }
+  }
+}

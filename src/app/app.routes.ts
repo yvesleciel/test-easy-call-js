@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import {HomeComponent} from "./home/home.component";
-import {PeerCallComponent} from "./peer-call/peer-call.component";
+import { LobbyComponent } from './lobby/lobby.component';
+import { CallHubComponent } from './call-hub/call-hub.component';
 
 export const routes: Routes = [
-  {path:'home', component:HomeComponent},
-  {path: 'call/:userId', component: PeerCallComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'}
+  { path: '', component: LobbyComponent },
+  { path: 'hub/:userId', component: CallHubComponent },
+  { path: '**', redirectTo: '' },
 ];
