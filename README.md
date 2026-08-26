@@ -146,9 +146,12 @@ firebase-tools` puis `firebase login`) :
 npx firebase deploy --only firestore:rules
 ```
 
-`firebase.json` et `.firebaserc` (projet `REDACTED_PROJECT_ID`) sont déjà
-fournis — adaptez `.firebaserc` si vous utilisez votre propre projet
-Firebase.
+`firebase.json` est fourni. `.firebaserc` (quel projet Firebase cible
+`firebase deploy`) est gitignored — créez le vôtre avec
+`firebase use --add`, ou un fichier `.firebaserc` :
+```json
+{ "projects": { "default": "VOTRE_PROJET_FIREBASE" } }
+```
 
 ## Utiliser ses propres serveurs STUN/TURN
 

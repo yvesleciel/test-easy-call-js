@@ -45,3 +45,7 @@ Thumbs.db
 # firebase-config.example.ts to firebase-config.local.ts and fill in your
 # own values (see README → Prérequis).
 /src/app/firebase-config.local.ts
+
+# Which Firebase project `firebase deploy` targets — local/environment-
+# specific, set your own via `firebase use --add`.
+/.firebaserc
