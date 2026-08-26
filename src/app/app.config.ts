@@ -6,18 +6,11 @@ import { FirebaseCallProcess } from 'easy-call-js';
 import { provideEasyCall } from 'easy-call-js/angular';
 
 import { routes } from './app.routes';
-
-// ⚠️ Remplacez ces valeurs par la configuration de VOTRE projet Firebase
-// (Console Firebase → Paramètres du projet → Vos applications → Configuration).
-const firebaseConfig = {
-  apiKey: "REDACTED_FIREBASE_API_KEY",
-  authDomain: "REDACTED.firebaseapp.com",
-  databaseURL: "https://REDACTED.firebaseio.com",
-  projectId: "REDACTED_PROJECT_ID",
-  storageBucket: "REDACTED.appspot.com",
-  messagingSenderId: "REDACTED_SENDER_ID",
-  appId: "1:REDACTED_SENDER_ID:web:84f383dab8fab365e0c04e"
-};
+// Your real project config — gitignored, not in this repo. Copy
+// firebase-config.example.ts to firebase-config.local.ts and fill in your
+// own values (Console Firebase → Paramètres du projet → Vos applications →
+// Configuration) before building.
+import { firebaseConfig } from './firebase-config.local';
 
 // firestore.rules gates every path behind `signedIn()` — this app never
 // shows a login screen, so an anonymous Firebase Auth session is the

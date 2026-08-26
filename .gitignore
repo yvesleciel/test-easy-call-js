@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Your real Firebase project config — never commit this. Copy
+# firebase-config.example.ts to firebase-config.local.ts and fill in your
+# own values (see README → Prérequis).
+/src/app/firebase-config.local.ts

@@ -12,7 +12,8 @@ l'usage de la **nouvelle API événementielle** (v2) :
 ## Prérequis
 
 1. Un projet Firebase (le signaling par défaut passe par Firestore).
-2. Remplir vos clés Firebase dans `src/app/app.config.ts` (constante `firebaseConfig`).
+2. Copier `src/app/firebase-config.example.ts` vers `src/app/firebase-config.local.ts`
+   (déjà gitignored) et y remplir vos clés Firebase.
 3. Node 18+, Angular CLI installé (`npm i -g @angular/cli`).
 4. Déployer les règles Firestore du projet — voir [Sécuriser Firestore](#sécuriser-firestore) ci-dessous. Par défaut, un projet Firebase neuf refuse tout accès ; sans ces règles, `easy-call-js` ne pourra ni créer de room ni échanger le SDP.
 
