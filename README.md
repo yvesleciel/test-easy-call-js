@@ -30,30 +30,21 @@ npx ng serve --host 0.0.0.0 --port 4200 --ssl true
 
 ## Tester un appel multipoint
 
-À l'ouverture, chaque onglet atterrit sur le **lobby** avec un identifiant
-déjà généré (ex. `swift-otter-42`), sans rien à saisir.
+À l'ouverture, chaque appareil atterrit sur le **lobby** avec un
+identifiant déjà généré (ex. `swift-otter-42`), sans rien à saisir.
 
-**Tout·e seul·e, sur plusieurs onglets :**
-
-1. Ouvrez `https://<votre-ip>:4200/` dans 3 onglets. Chaque onglet obtient
-   son propre identifiant (indépendant des autres — voir
-   [Identifiants de test](#identifiants-de-test)).
-2. Sur chaque onglet, notez l'identifiant affiché puis cliquez **Entrer
-   dans le hub**.
-3. Depuis le premier onglet, dans le champ *"Appeler qui ?"*, tapez les
-   identifiants des deux autres, séparés par une virgule.
-4. Cliquez **Démarrer l'appel**. Sur les deux autres onglets, un bandeau
-   *"📞 Appel entrant"* apparaît — cliquez **Accepter**. Les trois
-   participants voient les vidéos des deux autres dans la grille.
-
-**À deux (ou plus), sur des appareils différents :**
-
-1. Dans le lobby, cliquez **Copier le lien d'invitation** (ou **Copier
-   l'identifiant**) et envoyez-le à la personne à appeler par le canal de
+1. Sur chaque appareil qui doit participer à l'appel (ordinateur,
+   téléphone, tablette...), ouvrez `https://<votre-ip>:4200/`.
+2. Dans le lobby, cliquez **Copier le lien d'invitation** (ou **Copier
+   l'identifiant**) et partagez-le aux autres participants par le canal de
    votre choix (chat, SMS, etc.).
-2. Chacun clique **Entrer dans le hub** sur son propre appareil.
-3. L'un des deux tape l'identifiant de l'autre dans *"Appeler qui ?"* et
-   clique **Démarrer l'appel** — le reste est identique.
+3. Chacun clique **Entrer dans le hub** sur son propre appareil.
+4. L'un des participants tape les identifiants des autres dans le champ
+   *"Appeler qui ?"* (séparés par une virgule pour appeler plusieurs
+   personnes à la fois) puis clique **Démarrer l'appel**.
+5. Sur les autres appareils, un bandeau *"📞 Appel entrant"* apparaît —
+   cliquez **Accepter**. Tous les participants voient les vidéos des
+   autres dans la grille.
 
 ## Flux couverts par la demo
 
@@ -81,42 +72,25 @@ de connexion, pas de compte. Deux problèmes se posent alors :
    Comme `users/{userId}/call/callId` est une clé Firestore littérale sur
    cet id, ça collisionne : le bandeau "appel entrant" d'un inconnu
    pourrait sonner chez un autre inconnu.
-2. **Coordination.** Pour tester à deux, il faut un moyen simple de
-   communiquer "voici mon identifiant, appelle-moi".
+2. **Coordination.** Pour appeler quelqu'un, il faut un moyen simple de
+   lui communiquer "voici mon identifiant, appelle-moi".
 
 `SessionIdentityService` (`src/app/identity/session-identity.service.ts`)
 règle les deux : il génère un identifiant lisible (`adjectif-animal-nombre`,
-ex. `swift-otter-42`) une seule fois par **onglet**, le garde dans
-`sessionStorage`, et le lobby (`LobbyComponent`) l'affiche avec des
-boutons **Copier l'identifiant** / **Copier le lien d'invitation** /
-**Regénérer**.
+ex. `swift-otter-42`) pour chaque appareil, et le lobby (`LobbyComponent`)
+l'affiche avec des boutons **Copier l'identifiant** / **Copier le lien
+d'invitation** / **Regénérer**.
 
 - Personne n'a besoin d'inventer un nom → plus de collision entre
   inconnus (l'espace des identifiants est assez grand pour un usage démo).
-- `sessionStorage` est isolé par onglet (contrairement à `localStorage`,
-  partagé par tout le navigateur) : ouvrir 3 onglets donne 3 identifiants
-  distincts, ce qui permet toujours de simuler un appel à plusieurs en
-  solo — exactement comme avant, sans rien à taper.
-- Le bouton **Copier le lien d'invitation** restaure un vrai test
-  cross-device : deux personnes sur deux appareils différents peuvent
-  s'appeler en se partageant simplement un lien, sans devoir se mettre
-  d'accord sur un nom à l'avance.
+- Le bouton **Copier le lien d'invitation** permet un vrai test
+  cross-device : plusieurs personnes, chacune sur son propre appareil,
+  peuvent s'appeler en se partageant simplement un lien, sans devoir se
+  mettre d'accord sur un nom à l'avance.
 
 Il n'y a plus de correspondance "id → nom affiché" hardcodée (ancien
 `UserDirectory`) : les identifiants sont déjà lisibles et sont affichés
 tels quels partout (en-tête, bandeaux, tuiles vidéo).
-
-## Note technique — pourquoi `paths` dans `tsconfig.json` ?
-
-`tsconfig.json` route les imports `easy-call-js` et `easy-call-js/angular`
-directement vers les sources TypeScript de la lib locale. C'est nécessaire
-tant que la lib n'est pas packagée avec `ng-packagr` — le compilateur
-Angular (`ngc`) a alors besoin de la source pour générer les metadata
-AOT des directives standalone.
-
-Pour publier `easy-call-js` v2 sur npm, il faudra ajouter `ng-packagr` sur
-le sous-package `angular/`. C'est un follow-up prévu, pas requis pour ce
-projet de démo.
 
 ## Sécuriser Firestore
 
